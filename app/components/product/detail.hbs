@@ -13,8 +13,8 @@
 
   <!-- price -->
   <section class={{unless @isDetails "h4"}}>
-    <del class="small text-black-50">{{currency @price.original}}</del>
-    <i class="text-danger font-weight-bold">{{currency @price.current}}</i>
+    <del data-test-original-price class="small text-black-50">{{currency @price.original}}</del>
+    <i data-test-current-price class="text-danger font-weight-bold">{{currency @price.current}}</i>
   </section>
   {{#if @isDetails}}
     <div class="d-flex justify-content-between align-items-end">
@@ -23,13 +23,15 @@
         <h3>Color</h3>
         <div class="product-colors active-{{@color}}">
           {{#each @colors as |colorObj|}}
-            <span class="product-color {{concat "color-" colorObj.color}}" 
+            <span data-test-color={{colorObj.color}} class="product-color {{concat "color-" colorObj.color}}" 
               {{on 'click' (fn @onChangeColor colorObj.color)}}
             ></span>
           {{/each}}
         </div>
       </div>
-      <button class="btn btn-info" type="button" {{on 'click' this.addToCart}}>
+      <button  
+        data-test-addToCart
+        class="btn btn-info" type="button" {{on 'click' this.addToCart}}>
         <i class="fa fa-shopping-cart mr-1"></i>
         Add to cart
       </button>
